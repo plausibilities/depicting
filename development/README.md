@@ -39,6 +39,9 @@ or
   conda update -n base -c anaconda conda==23.3.1
 ```
 
+Later
+* repr, IRdisplay, evaluate, crayon, pbdMQ, devtools, uuid, digest, IRkernel
+
 <br>
 <br>
 
