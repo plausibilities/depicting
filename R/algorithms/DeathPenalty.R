@@ -14,7 +14,7 @@
 DeathPenalty <- function () {
 
   # The death penalty survey
-  T <- as.data.frame(x = matrix(data = scan(file = 'data/polls.dat'), ncol = 5, byrow = TRUE))
+  T <- as.data.frame(x = matrix(data = scan(file = 'data/deathPenalty.dat'), ncol = 5, byrow = TRUE))
   names(T) <- c('year', 'datepart', 'supporting', 'against', 'mark')
 
   # The fraction & percentage of people in favour
