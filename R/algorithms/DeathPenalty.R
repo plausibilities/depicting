@@ -4,12 +4,12 @@
 # Created on: 22/05/2023
 
 
+#' Death Penalty
 #'
 #' @note:
 #'    https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/par
 #'    https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot.default
 #'    https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/points (pch)
-#'
 #'
 DeathPenalty <- function () {
 
@@ -42,5 +42,5 @@ DeathPenalty <- function () {
   ylimits <- c(min(percentages) - 1, max(percentages) + 1)
   plot(x = abscissae, y = percentages, xlab = 'year', ylab = '% in favour of the penalty',
        ylim = ylimits, pch = 19, frame.plot = FALSE)
-  
+
 }
