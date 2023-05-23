@@ -4,6 +4,9 @@
 # Created on: 22/05/2023
 
 
+source(file = 'R/functions/StandardScore.R')
+
+
 #' Death Penalty
 #'
 #' @note:
@@ -15,32 +18,37 @@ DeathPenalty <- function () {
 
   # The death penalty survey
   T <- as.data.frame(x = matrix(data = scan(file = file.path('data', 'deathPenalty.dat')), ncol = 5, byrow = TRUE))
-  names(T) <- c('year', 'datepart', 'supporting', 'against', 'mark')
+  names(T) <- c('year', 'datepart', 'supporting', 'against', 'extraneous')
 
 
-  # The fraction & percentage of people in favour
-  fractions <- T$supporting / (T$supporting + T$against)
-  percentages <- 100 * fractions
-  abscissae <- T$year + (T$datepart - 6)/12
+  # The fraction of people in favour
+  T$fraction <- T$supporting / (T$supporting + T$against)
+  T$abscissa <- T$year + (T$datepart - 6)/12
 
 
-  # The standard error of the proportions
-  #   - in favour estimate: p = supporting/(supporting + against)
-  #   - standard error of an estimate: s.e. = sqrt(p(1 - p)/n), wherein n is the survey size
-  standard_error <- sqrt(fractions*(1 - fractions)/1000)
+  # The standard error of a proportion
+  #   - an estimated proportion in favour: fraction = supporting/(supporting + against)
+  #   - the standard error of the estimate: SE = sqrt(fraction(1 - fraction)/n), wherein n is the survey size
+  SE <- sqrt(T$fraction*(1 - T$fraction)/1000)
 
 
-  # 68% confidence interval, 0.5(1 + 0.68) = 0.84
-  # ± 1 standard error
-  interval_half <- qnorm(p = 0.840, lower.tail = TRUE) * standard_error
-  fraction_boundaries <- fractions +
-    matrix(data = interval_half) %*%  matrix(data = c(-1, 1), nrow = 1, ncol = 2)
-  percentage_boundaries <- 100 * fraction_boundaries
+  # The z-score (a) within <z standard deviations> via which a confidence level fraction is determined,
+  # or (b) with respect to a confidence interval percentage, e.g., 68% ≈ erf(<1 standard deviation>/sqrt(2))
+  # ± 1 standard deviations
+  score <- StandardScore(deviations = 1)
+
+
+  # radius, i.e., margin of error
+  # radius <- z-score * standard error
+  #   - https://en.wikipedia.org/wiki/Margin_of_error
+  radius <- score * SE
+  T[, c('LCB', 'UCB')] <- T$fraction +
+    matrix(data = radius) %*%  matrix(data = c(-1, 1), nrow = 1, ncol = 2)
 
 
   # Graphing
-  ylimits <- c(min(percentages) - 1, max(percentages) + 1)
-  plot(x = abscissae, y = percentages, xlab = 'year', ylab = '% in favour of the penalty',
+  ylimits <- c(min(T$fraction) - 0.1, max(T$fraction) + 0.1)
+  plot(x = T$abscissa, y = T$fraction, xlab = 'year', ylab = '% in favour of the penalty',
        ylim = ylimits, pch = 19, frame.plot = FALSE)
 
 }
