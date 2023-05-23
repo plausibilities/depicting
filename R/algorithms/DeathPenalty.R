@@ -14,9 +14,10 @@ source(file = 'R/functions/StandardScore.R')
 #'    https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/plot.default
 #'    https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/points (pch)
 #'
-DeathPenalty <- function () {
+DeathPenalty <- function() {
 
   library(ggplot2)
+
 
   # The death penalty survey
   T <- as.data.frame(x = matrix(data = scan(file = file.path('data', 'deathPenalty.dat')), ncol = 5, byrow = TRUE))
@@ -25,13 +26,13 @@ DeathPenalty <- function () {
 
   # The fraction of people in favour
   T$fraction <- T$supporting / (T$supporting + T$against)
-  T$abscissa <- T$year + (T$datepart - 6)/12
+  T$abscissa <- T$year + (T$datepart - 6) / 12
 
 
   # The standard error of a proportion
   #   - an estimated proportion in favour: fraction = supporting/(supporting + against)
   #   - the standard error of the estimate: SE = sqrt(fraction(1 - fraction)/n), wherein n is the survey size
-  SE <- sqrt(T$fraction*(1 - T$fraction)/1000)
+  SE <- sqrt(T$fraction * (1 - T$fraction) / 1000)
 
 
   # The z-score (a) within <z standard deviations> via which a confidence level fraction is determined,
@@ -45,7 +46,7 @@ DeathPenalty <- function () {
   #   - https://en.wikipedia.org/wiki/Margin_of_error
   radius <- score * SE
   T[, c('LCB', 'UCB')] <- T$fraction +
-    matrix(data = radius) %*%  matrix(data = c(-1, 1), nrow = 1, ncol = 2)
+    matrix(data = radius) %*% matrix(data = c(-1, 1), nrow = 1, ncol = 2)
 
 
   #' Graphing
