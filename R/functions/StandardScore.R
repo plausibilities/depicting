@@ -20,7 +20,6 @@ StandardScore <- function (gamma = NULL, deviations = 2) {
   } else {
     fraction <- gamma/100
   }
-  cat(fraction)
 
   # The significance level
   # - https://www.itl.nist.gov/div898/handbook/prc/section1/prc14.htm
@@ -35,4 +34,5 @@ StandardScore <- function (gamma = NULL, deviations = 2) {
   score <- qnorm(p = at, lower.tail = TRUE)
 
   return(score)
+
 }
