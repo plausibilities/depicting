@@ -16,6 +16,8 @@ source(file = 'R/functions/StandardScore.R')
 #'
 DeathPenalty <- function () {
 
+  library(ggplot2)
+
   # The death penalty survey
   T <- as.data.frame(x = matrix(data = scan(file = file.path('data', 'deathPenalty.dat')), ncol = 5, byrow = TRUE))
   names(T) <- c('year', 'datepart', 'supporting', 'against', 'extraneous')
@@ -47,8 +49,35 @@ DeathPenalty <- function () {
 
 
   # Graphing
-  ylimits <- c(min(T$fraction) - 0.1, max(T$fraction) + 0.1)
-  plot(x = T$abscissa, y = T$fraction, xlab = 'year', ylab = '% in favour of the penalty',
-       ylim = ylimits, pch = 19, frame.plot = FALSE)
+  # ylimits <- c(min(T$fraction) - 0.1, max(T$fraction) + 0.1)
+  # plot(x = T$abscissa, y = T$fraction, xlab = 'year', ylab = '% in favour of the penalty',
+  #      ylim = ylimits, pch = 19, frame.plot = FALSE)
+
+
+  T %>%
+    ggplot(aes(x = abscissa, y = fraction)) +
+    geom_pointrange(aes(ymin = LCB, ymax = UCB)) +
+    theme_minimal() +
+    theme(panel.grid.minor = element_blank(),
+          panel.grid.major = element_line(linewidth = 0.05),
+          plot.margin = margin(t = 1, r = 1, b = 7, l = 1, unit = 'cm'),
+          plot.title = element_text(hjust = 0.25, size = 13, face = 'bold'),
+          plot.caption = element_text(hjust = 0, size = 11, colour = 'darkgrey'),
+          axis.title.x = element_text(size = 13, face = 'bold'), axis.text.x = element_text(size = 11),
+          axis.title.y = element_text(size = 13, face = 'bold'), axis.text.y = element_text(size = 11)) +
+    xlab(label = '\nyear\n') +
+    ylab(label = '\nfraction\n')
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
