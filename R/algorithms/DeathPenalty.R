@@ -48,12 +48,12 @@ DeathPenalty <- function () {
     matrix(data = radius) %*%  matrix(data = c(-1, 1), nrow = 1, ncol = 2)
 
 
-  # Graphing
-  # ylimits <- c(min(T$fraction) - 0.1, max(T$fraction) + 0.1)
-  # plot(x = T$abscissa, y = T$fraction, xlab = 'year', ylab = '% in favour of the penalty',
-  #      ylim = ylimits, pch = 19, frame.plot = FALSE)
-
-
+  #' Graphing
+  #'
+  #' @note
+  #'    ylimits <- c(min(T$fraction) - 0.1, max(T$fraction) + 0.1)
+  #'    plot(x = T$abscissa, y = T$fraction, xlab = 'year', ylab = '% in favour of the penalty',
+  #'         ylim = ylimits, pch = 19, frame.plot = FALSE)
   T %>%
     ggplot(aes(x = abscissa, y = fraction)) +
     geom_pointrange(aes(ymin = LCB, ymax = UCB)) +
@@ -69,15 +69,3 @@ DeathPenalty <- function () {
     ylab(label = '\nfraction\n')
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
