@@ -8,21 +8,25 @@
 #'
 Activate <- function () {
 
-  packages <- c('data.table', 'tidyverse', 'moments', 'rmarkdown', 'latex2exp',
+  packages <- c('repr', 'evaluate', 'crayon', 'pbdZMQ', 'uuid', 'digest',
+                'data.table', 'tidyverse', 'moments', 'rmarkdown', 'latex2exp',
                 'roxygen2', 'equatiomatic', 'rstatix', 'matrixStats', 'patchwork',
-                'lme4', 'nlme', 'DescTools')
+                'lme4', 'nlme', 'DescTools', 'pracma')
+
 
   # Activate
   .activate <- function (x){
-    library(x, character.only = TRUE)
+    library(x, character.only = TRUE, verbose = FALSE, quietly =  TRUE)
     if (x == 'rmarkdown') {library(tinytex)}
   }
-  lapply(packages[!(packages %in% c('tidyverse', 'equatiomatic', 'data.table'))], .activate)
+  lapply(packages[!(packages %in% c('tidyverse', 'equatiomatic', 'data.table'))], invisible(.activate))
+
 
   # Special Case
   if ('tidyverse' %in% packages) {
-    lapply(X = c('magrittr', 'dplyr', 'tibble', 'ggplot2', 'stringr', 'lubridate'), .activate)
+    lapply(X = c('magrittr', 'dplyr', 'tibble', 'ggplot2', 'stringr', 'lubridate'), invisible(.activate))
   }
+
 
   # Active libraries
   sessionInfo()
