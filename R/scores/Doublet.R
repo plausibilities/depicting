@@ -7,21 +7,29 @@
 
 Doublet <- function () {
 
+  # The data
   T <- haven::read_dta(file = file.path(getwd(), 'data', 'childTestScore.dta'))
   T$mom_hs <- as.factor(T$mom_hs)
 
-  initial <- lm(formula = kid_score ~ mom_hs + mom_iq, data = T)
-  T$estimate <- initial$fitted.values
-  summary(object = initial)
 
+  # Linear regression
+  # summary(object = initial)
+  initial <- lm(formula = kid_score ~ mom_hs + mom_iq, data = T)
+  T$estimate <- as.numeric(initial$fitted.values)
+
+
+  # Coefficients
+  coefficients <- as.list(coef(initial))
+
+
+  # Illustrate
   T %>%
     ggplot(mapping = aes(x = mom_iq, y = kid_score, colour = mom_hs)) +
     scale_colour_manual(values = c('orange', 'black'), labels = c('no', 'yes')) +
     geom_point(alpha = 0.65) +
-    geom_abline(aes(slope = coef(initial)[['mom_iq']],
-                    intercept = coef(initial)[['(Intercept)']] + as.numeric(as.character(mom_hs))*coef(initial)[['mom_hs1']],
-                    colour = mom_hs)
-                ) +
+    geom_abline(aes(slope = coefficients$mom_iq,
+                    intercept = coefficients$`(Intercept)` + as.numeric(as.character(mom_hs))*coefficients$mom_hs1,
+                    colour = mom_hs)) +
     theme_minimal() +
     theme(panel.grid.minor = element_blank(),
           panel.grid.major = element_line(linewidth = 0.05),
