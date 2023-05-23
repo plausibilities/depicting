@@ -50,6 +50,13 @@ Later
 * Special characters, etc.: https://www.toptal.com/designers/htmlarrows/
 * Mathematical text: https://en.wikipedia.org/wiki/Help:Displaying_a_formula
 
+<br>
+<br>
+
+### Graphing
+
+* [par](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/par)
+* [ggplot2](https://ggplot2.tidyverse.org)
 
 <br>
 <br>
