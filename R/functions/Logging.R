@@ -6,7 +6,7 @@
 
 #' Logging
 #'
-#' @param namestr: The path + file name of the log file.
+#' @param namestr: The <path name> + <file name & extension> of the log file.
 #' @param notes: The log notes
 #'
 Logging <- function (namestr, notes) {
