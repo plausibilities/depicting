@@ -21,7 +21,7 @@ DeathPenalty <- function() {
 
   # The death penalty survey
   T <- as.data.frame(x = matrix(data = scan(file = file.path('data', 'deathPenalty.dat')), ncol = 5, byrow = TRUE))
-  names(T) <- c('year', 'datepart', 'supporting', 'against', 'extraneous')
+  names(T) <- c('year', 'datepart', 'supporting', 'against', 'neither')
 
 
   # The fraction of people in favour
@@ -29,10 +29,13 @@ DeathPenalty <- function() {
   T$abscissa <- T$year + (T$datepart - 6) / 12
 
 
-  # The standard error of a proportion
+  # The standard error (SE) of a proportion
   #   - an estimated proportion in favour: fraction = supporting/(supporting + against)
-  #   - the standard error of the estimate: SE = sqrt(fraction(1 - fraction)/n), wherein n is the survey size
-  SE <- sqrt(T$fraction * (1 - T$fraction) / 1000)
+  #   - the standard error of the estimate: SE = sqrt(fraction(1 - fraction)/n), wherein n is the expected
+  #     sample size per survey size.  It is possible that one or more surveys have an incomplete number
+  #     of responses
+  n <- 1000
+  SE <- sqrt(T$fraction * (1 - T$fraction) / n)
 
 
   # The z-score (a) within <z standard deviations> via which a confidence level fraction is determined,
