@@ -11,8 +11,13 @@
 #'
 Logging <- function (namestr, notes) {
 
-  sink(file = namestr)
-  print(notes)
-  sink()
+  tryCatch(
+    expr = {
+      sink(file = file(namestr, open = 'wt'), type = 'output', split = FALSE)
+      print(notes)
+      sink()
+    },
+    error = function(e){message(e$message)}, warning = function(w){message(w$message)}, finally = {basename(namestr)}
+  )
 
 }
