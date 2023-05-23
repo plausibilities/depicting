@@ -24,7 +24,7 @@ Activate <- function () {
 
   # Special Case
   if ('tidyverse' %in% packages) {
-    lapply(X = c('magrittr', 'dplyr', 'tibble', 'ggplot2', 'stringr', 'lubridate'), invisible(.activate))
+    lapply(X = c('magrittr', 'dplyr', 'tibble', 'ggplot2', 'stringr', 'lubridate', 'haven'), invisible(.activate))
   }
 
 
