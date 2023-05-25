@@ -7,8 +7,8 @@
 source(file = file.path(getwd(), 'R', 'algorithms', 'stops', 'StudyData.R'))
 
 collection <- StudyData()
-instances <- collection$instances
-head(instances)
+fundamental <- collection$fundamental
+head(fundamental)
 
 
 
