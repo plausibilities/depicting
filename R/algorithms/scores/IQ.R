@@ -11,7 +11,7 @@ IQ <- function () {
 
 
   # The data
-  T <- haven::read_dta(file = file.path(getwd(), '../../../data', 'childTestScore.dta'))
+  T <- haven::read_dta(file = file.path(getwd(), 'data', 'childTestScore.dta'))
   T$mom_hs <- as.factor(T$mom_hs)
 
 
