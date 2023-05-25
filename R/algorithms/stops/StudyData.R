@@ -12,7 +12,7 @@ StudyData <- function () {
 
   # The data
   T <- read.table(file = file.path(getwd(), 'data', 'policeStops.dat'), header = TRUE, skip = 6)
-  T <- dplyr::rename(T, population = 'pop', ethnicity = 'eth', 'past_arrests' = 'past.arrests')
+  T <- dplyr::rename(T, population = 'pop', ethnicity = 'eth', 'arrests' = 'past.arrests')
 
 
   # Factoring
@@ -24,29 +24,29 @@ StudyData <- function () {
   # names from -> crime
   # values from -> stops, past.arrests
   T %>%
-    tidyr::pivot_wider(names_from = crime, values_from = c(stops, 'past_arrests') )
+    tidyr::pivot_wider(names_from = crime, values_from = c(stops, 'arrests') )
 
 
   # keys-> population, precinct, ethinicity
   # names from -> crime
   # values from -> stops
   T %>%
-    select(!past_arrests) %>%
+    select(!arrests) %>%
     tidyr::pivot_wider(names_from = crime, values_from = stops)
 
 
   # keys-> population, precinct, ethinicity
   # names from -> crime
-  # values from -> past_arrests
+  # values from -> arrests
   T %>%
     select(!stops) %>%
-    tidyr::pivot_wider(names_from = crime, values_from = 'past_arrests')
+    tidyr::pivot_wider(names_from = crime, values_from = 'arrests')
 
 
   # Aggregated by stops & past arrests
   fundamental <- T %>%
     group_by(precinct, ethnicity, population) %>%
-    summarise(across(c(stops, past_arrests), sum))
+    summarise(across(c(stops, arrests), sum))
 
 
   return(list(T = T, fundamental = fundamental))
