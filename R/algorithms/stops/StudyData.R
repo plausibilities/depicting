@@ -4,6 +4,10 @@
 # Created on: 25/05/2023
 
 
+#' Study Data
+#'
+#' @description The data, and features.
+#'
 StudyData <- function () {
 
   # The data
