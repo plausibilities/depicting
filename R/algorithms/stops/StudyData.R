@@ -40,11 +40,11 @@ StudyData <- function () {
 
 
   # Aggregated by stops & past arrests
-  instances <- T %>%
+  fundamental <- T %>%
     group_by(precinct, ethnicity, population) %>%
     summarise(across(c(stops, past_arrests), sum))
 
 
-  return(list(T = T, instances = instances))
+  return(list(T = T, fundamental = fundamental))
 
 }
