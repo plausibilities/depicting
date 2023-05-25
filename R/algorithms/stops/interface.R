@@ -12,6 +12,16 @@ collection <- StudyData()
 fundamental <- collection$fundamental
 head(fundamental)
 
+# generalised linear model
+initial <- glm(formula = stops ~ 1, family = poisson(link = 'log'), offset = log(x = arrests), data = fundamental)
+summary(object = initial)
+
+extended <- glm(formula = stops ~ ethnicity, family = poisson(link = 'log'), offset = log(x = arrests), data = fundamental)
+summary(object = extended)
+
+
+
+
 
 
 
