@@ -19,7 +19,8 @@ summary(object = initial)
 extended <- glm(formula = stops ~ ethnicity, family = poisson(link = 'log'), offset = log(x = arrests), data = fundamental)
 summary(object = extended)
 
-
+finally <- glm(formula = stops ~ ethnicity + precinct, family = poisson(link = 'log'), offset = log(x = arrests), data = fundamental)
+summary(object = finally)
 
 
 
