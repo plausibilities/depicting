@@ -18,6 +18,7 @@ StudyData <- function () {
   # Factoring
   T$ethnicity <- factor(x = T$ethnicity, levels = c(1, 2, 3), labels = c('black', 'hispanic', 'white'))
   T$crime <- factor(x = T$crime, levels = c(1, 2, 3, 4), c('violent', 'weapons', 'property', 'drug'))
+  T$precinct <- factor(x = T$precinct, levels = 1:75)
 
 
   # keys-> population, precinct, ethinicity
