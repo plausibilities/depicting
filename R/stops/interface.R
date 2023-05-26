@@ -5,9 +5,9 @@
 
 
 # functions
-pathstr <- file.path(getwd(), 'R', 'algorithms', 'stops')
-source(file = file.path(pathstr, '../../stops/StudyData.R'))
-source(file = file.path(pathstr, '../../stops/GLM.R'))
+pathstr <- file.path(getwd(), 'R', 'stops')
+source(file = file.path(pathstr, 'StudyData.R'))
+source(file = file.path(pathstr, 'GLM.R'))
 
 
 # reading-in
@@ -26,14 +26,10 @@ model <- GLM(data = fundamental, type = 'core')
 #  - standardised residuals
 #  - overdispersion test
 
+
 # estimate
 diagnostics <- cbind(fundamental, estimate = stats::predict.glm(object = model, type = 'response'))
 
+
 # raw residual
 diagnostics$residual_raw <- diagnostics$stops - diagnostics$estimate
-
-
-
-
-
-
