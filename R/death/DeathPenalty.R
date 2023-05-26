@@ -4,7 +4,7 @@
 # Created on: 22/05/2023
 
 
-source(file = file.path(getwd(), 'R', 'functions', 'StandardScore.R'))
+source(file = file.path(getwd(), 'R', 'algorithms', 'StandardScore.R'))
 
 
 #' Death Penalty
@@ -20,7 +20,7 @@ DeathPenalty <- function() {
 
 
   # The death penalty survey
-  T <- as.data.frame(x = matrix(data = scan(file = file.path(getwd(), '../../data', 'deathPenalty.dat')), ncol = 5, byrow = TRUE))
+  T <- as.data.frame(x = matrix(data = scan(file = file.path(getwd(), 'data', 'deathPenalty.dat')), ncol = 5, byrow = TRUE))
   names(T) <- c('year', 'datepart', 'supporting', 'against', 'neither')
 
 
