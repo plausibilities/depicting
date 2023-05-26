@@ -6,8 +6,8 @@
 
 # functions
 pathstr <- file.path(getwd(), 'R', 'algorithms', 'stops')
-source(file = file.path(pathstr, 'StudyData.R'))
-source(file = file.path(pathstr, 'GLM.R'))
+source(file = file.path(pathstr, '../../stops/StudyData.R'))
+source(file = file.path(pathstr, '../../stops/GLM.R'))
 
 
 # reading-in
