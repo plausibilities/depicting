@@ -5,27 +5,32 @@
 
 
 # functions
-source(file = file.path(getwd(), 'R', 'algorithms', 'stops', 'StudyData.R'))
+pathstr <- file.path(getwd(), 'R', 'algorithms', 'stops')
+source(file = file.path(pathstr, 'StudyData.R'))
+source(file = file.path(pathstr, 'GLM.R'))
+
 
 # reading-in
 collection <- StudyData()
 fundamental <- collection$fundamental
 head(fundamental)
 
-# generalised linear model
-initial <- glm(formula = stops ~ 1, family = poisson(link = 'log'), offset = log(x = arrests), data = fundamental)
-summary(object = initial)
 
-extended <- glm(formula = stops ~ ethnicity, family = poisson(link = 'log'), offset = log(x = arrests), data = fundamental)
-summary(object = extended)
-
-finally <- glm(formula = stops ~ ethnicity + precinct, family = poisson(link = 'log'), offset = log(x = arrests), data = fundamental)
-summary(object = finally)
+# a generalised linear model; model is a stats::glm(.) model object
+model <- GLM(data = fundamental, type = 'core')
 
 
+# diagnostics
+#  - estimates
+#  - raw residuals
+#  - standardised residuals
+#  - overdispersion test
 
+# estimate
+diagnostics <- cbind(fundamental, estimate = stats::predict.glm(object = model, type = 'response'))
 
-
+# raw residual
+diagnostics$residual_raw <- diagnostics$stops - diagnostics$estimate
 
 
 
