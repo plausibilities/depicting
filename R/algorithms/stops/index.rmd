@@ -1,0 +1,81 @@
+---
+title: Stops
+runningheader: "Police Stops"
+author: notes
+date: "`r Sys.Date()`"
+documentclass: book
+bibliography: "`r file.path(getwd(), 'bibliography', 'bibliography.bib')`"
+csl: "`r file.path(getwd(), 'bibliography', 'cambridge-university-press-numeric.csl')`"
+link-citations: yes
+classoption:
+  - fleqn
+extra_dependencies:
+  - float
+site: bookdown::bookdown_site
+output: bookdown::tufte_book2
+---
+
+
+
+<!--- Global Settings --->
+```{r include = FALSE}
+# Settings
+knitr::opts_chunk$set(echo = FALSE, comment = '')
+options(knitr.table.format = 'latex')
+options(knitr.kable.NA = '')
+# Invalidate cache when the tufte version changes
+library(tufte)
+knitr::opts_chunk$set(cache.extra = packageVersion(pkg = 'tufte'))
+options(htmltools.dir.version = FALSE)
+```
+
+
+```{r include = FALSE}
+library(xtable)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(magrittr)
+library(latex2exp)
+library(patchwork)
+library(knitr)
+library(kableExtra)
+library(tmap)
+library(sf)
+```
+
+<!--- settings --->
+```{r exploration settings}
+pathstr <- dirname(getwd())
+```
+
+
+
+# *INTRODUCTION* {-}
+
+A brief re-visit of generalised linear models, focusing on count outcomes.
+
+
+# *THE CASE*
+
+The focus herein is an analysis of police stops in New York.  Let $y_{i}$ denote the number of police stops in a New York precinct vis-à-vis an ethnic group. The data focuses on the same $3$ ethnic groups per precinct. There are $75$ precincts, hence $225$ observations, i.e., $i = {1, 2, \ldots, 225}$.  In addition to the precinct and ethnic group variables, the data includes the number of past arrests per precinct/ethnicity combination.
+
+The stops are counts, hence analysis is via Poisson models.  In general
+
+\begin{equation}
+y_{i} \sim Poisson(\mathcal{u}_i \lambda_{i}) (\#eq:0001)
+\end{equation}
+
+whereby
+
+\begin{equation}
+\lambda_{i} = exp(\mathbf{x}_{i} \mathbf{\beta}) (\#eq:0002)
+\end{equation}
+
+hence
+
+\begin{equation}
+ln(\mathcal{u}_i \lambda_{i}) = ln(\mathcal{u}_i) + \mathbf{x}_{i} \mathbf{\beta} (\#eq:0003)
+\end{equation}
+
