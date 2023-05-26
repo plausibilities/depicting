@@ -3,7 +3,7 @@
 # Created by: greyhypotheses
 # Created on: 26/05/2023
 
-root <- file.path(getwd(), 'R', 'algorithms', 'stops')
+root <- file.path(getwd(), 'R', 'stops')
 
 # create book
 bookdown::render_book(input = root, output_file = 'input.pdf', output_dir = root,
