@@ -20,7 +20,7 @@ DeathPenalty <- function() {
 
 
   # The death penalty survey
-  T <- as.data.frame(x = matrix(data = scan(file = file.path(getwd(), 'data', 'deathPenalty.dat')), ncol = 5, byrow = TRUE))
+  T <- as.data.frame(x = matrix(data = scan(file = file.path(getwd(), '../../data', 'deathPenalty.dat')), ncol = 5, byrow = TRUE))
   names(T) <- c('year', 'datepart', 'supporting', 'against', 'neither')
 
 
