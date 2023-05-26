@@ -44,3 +44,7 @@ vignettes/*.pdf
 # Logs
 *.log
 
+# Jupyter Notebook
+.ipynb_checkpoints
+
+
