@@ -61,10 +61,15 @@ A brief re-visit of generalised linear models, focusing on count outcomes.
 
 The focus herein is an analysis of police stops in New York.  Let $y_{i}$ denote the number of police stops in a New York precinct vis-à-vis an ethnic group. The data focuses on the same $3$ ethnic groups per precinct. There are $75$ precincts, hence $225$ observations, i.e., $i = {1, 2, \ldots, 225}$.  In addition to the precinct and ethnic group variables, the data includes the number of past arrests per precinct/ethnicity combination.
 
-The stops are counts, hence analysis is via Poisson models.  In general
+The stops are counts, hence analysis is via Poisson models.
+
+
+## Poisson Generalised Linear Model
+
+In general
 
 \begin{equation}
-y_{i} \sim Poisson(\mathcal{u}_i \lambda_{i}) (\#eq:0001)
+y_{i} \sim Poisson(u_{i} \lambda_{i}) (\#eq:0001)
 \end{equation}
 
 whereby
@@ -76,6 +81,21 @@ whereby
 hence
 
 \begin{equation}
-ln(\mathcal{u}_i \lambda_{i}) = ln(\mathcal{u}_i) + \mathbf{x}_{i} \mathbf{\beta} (\#eq:0003)
+ln(u_{i} \lambda_{i}) = ln(u_{i}) + \mathbf{x}_{i} \mathbf{\beta} (\#eq:0003)
 \end{equation}
 
+
+## Over-dispersed Poisson Generalised Linear Model
+
+
+In general
+
+\begin{equation}
+y_{i} \sim \textit{over-dispersed} \; \text{Poisson}(u_{i} \lambda_{i}, \omega) (\#eq:0004)
+\end{equation}
+
+The parameter $\omega$ is over-dispersion parameter.  Akin to a count-data model wherein the variance of the data is
+
+\begin{equation}
+  \omega \lambda_{i} (\#eq:0005)
+\end{equation}
