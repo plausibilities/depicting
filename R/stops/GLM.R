@@ -17,7 +17,9 @@ GLM <- function(data, type) {
                extended = glm(formula = stops ~ ethnicity, family = poisson(link = 'log'),
                               offset = log(x = arrests), data = data),
                core = glm(formula = stops ~ ethnicity + precinct, family = poisson(link = 'log'),
-                          offset = log(x = arrests), data = data)
+                          offset = log(x = arrests), data = data),
+               alternative = glm(formula = stops ~ ethnicity + precinct, family = quasipoisson(link = 'log'),
+                                 offset = log(x = arrests), data = data)
   )
 
 }
