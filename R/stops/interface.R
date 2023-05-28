@@ -22,7 +22,7 @@ core <- Execute(data = fundamental, type = 'core')
 quasi <- Execute(data = fundamental, type = 'quasi')
 
 
-# We are dealingwith a finite number of events therefore the
+# We are dealing with a finite number of events therefore the
 #     expected standard error = expected standard deviation = 1
 # The expected mean is
 #     0
