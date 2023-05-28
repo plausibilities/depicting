@@ -30,12 +30,17 @@ Execute <- function(data, type) {
                       xlab = 'prediction', ylab = 'standardised residual')
 
 
+  # overdispersion
+  overdispersion_ratio <- sum(`^`(diagnostics$residual_standardised, 2)) / model$df.residual
+
+
   # overdispersion test; reject the null hypothesis - overdispersion ≈ 0 - at the 0.05 significance level
   # the degree of freedom, i.e., df, is number of observations - number of model parameters
-  test <- pchisq(q = sum(`^`(diagnostics$residual_standardised, 2), lower.tail = TRUE),
-         df = model$df.residual,
-         lower.tail = TRUE)
+  overdispersion_test <- pchisq(q = sum(`^`(diagnostics$residual_standardised, 2)),
+                                df = model$df.residual, lower.tail = TRUE)
 
-  return(list(model = model, diagnostics = diagnostics, graph.raw = raw, graph.standardised = standardised, test = test))
+
+  return(list(model = model, diagnostics = diagnostics, graph.raw = raw, graph.standardised = standardised,
+              overdispersion_ratio = overdispersion_ratio, overdispersion_test = overdispersion_test))
 
 }
