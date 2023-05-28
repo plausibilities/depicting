@@ -9,9 +9,9 @@
 #' @param data
 #' @param type
 #' 
-GLM <- function(data, type) {
+GLM <- function(data, structure.name) {
 
-  base::switch(type,
+  base::switch(structure.name,
                simple = glm(formula = stops ~ 1, family = poisson(link = 'log'),
                             offset = log(x = arrests), data = data),
                alternative = glm(formula = stops ~ ethnicity, family = poisson(link = 'log'),
