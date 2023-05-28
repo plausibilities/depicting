@@ -18,7 +18,7 @@ head(fundamental)
 
 core <- Execute(data = fundamental, type = 'core')
 
-
+quasi <- Execute(data = fundamental, type = 'quasi')
 
 
 
