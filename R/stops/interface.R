@@ -18,18 +18,13 @@ head(fundamental)
 
 # Note, the the value of the dispersion parameter vis-a-vis the quasi model (quasipoisson family) is
 # equivalent to the calculated overdispersion ratio of the core model (poisson family)
-core <- Execute(data = fundamental, type = 'core')
-quasi <- Execute(data = fundamental, type = 'quasi')
+core <- Execute(data = fundamental, model.name = 'core')
+quasi <- Execute(data = fundamental, model.name = 'quasi')
 
 
-# We are dealing with a finite number of events therefore the
-#     expected standard error = expected standard deviation = 1
-# The expected mean is
-#     0
-#
-source('R/algorithms/StandardScore.R')
-MU <- 0
-SE <- 1
-score <- StandardScore(gamma = 95, data.type = 'discrete', N = nrow(core$diagnostics))
-bounds <- MU + score*SE*c(-1, 1)
+
+
+
+
+
 
