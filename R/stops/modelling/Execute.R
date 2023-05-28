@@ -4,43 +4,68 @@
 # Created on: 28/05/2023
 
 
+
 source(file = file.path(getwd(), 'R', 'stops', 'modelling', 'GLM.R'))
+source(file = file.path(getwd(), 'R', 'stops', 'modelling', 'ResidualDraw.R'))
+source(file = file.path(getwd(), 'R', 'stops', 'modelling', 'StandardisedResidualDraw.R'))
+
 source(file = file.path(getwd(), 'R', 'algorithms', 'StandardisedResidual.R'))
+source(file = file.path(getwd(), 'R', 'algorithms', 'StandardScore.R'))
 
 
-Execute <- function(data, type) {
+
+#' Execute
+#'
+#' @param data: The data set
+#' @param model.name:
+#'
+Execute <- function(data, model.name) {
+
 
   # A generalised linear model; model is a stats::glm(.) model object
-  model <- GLM(data = data, type = type)
+  model <- GLM(data = data, model.name = model.name)
 
 
   # Estimate
   diagnostics <- cbind(data, estimate = as.numeric(stats::predict.glm(object = model, type = 'response')))
 
 
-  # raw residual
+  # We are dealing with a finite number of events therefore the
+  #     expected standard error = expected standard deviation = 1
+  # The expected mean is
+  #     0
+  # Hence, the standard z score:
+  MU <- 0
+  SE <- 1
+  score <- StandardScore(gamma = 95, data.type = 'discrete', N = nrow(diagnostics))
+
+
+  # Leading to confidence bounds:
+  bounds <- MU + score*SE*c(-1, 1)
+
+
+  # Raw Residual
   diagnostics$residual_raw <- diagnostics$stops - diagnostics$estimate
-  raw <- plot(x = diagnostics$estimate, y = diagnostics$residual_raw, frame.plot = FALSE,
-              xlab = 'prediction', ylab = 'residual')
+  raw <- ResidualDraw(prediction = diagnostics$estimate, residual = diagnostics$residual_raw)
 
 
-  # standardised residual
+  # Standardised Residual
   diagnostics$residual_standardised <- StandardisedResidual(y = diagnostics$stops, estimates = diagnostics$estimate)
-  standardised <- plot(x = diagnostics$estimate, y = diagnostics$residual_standardised, frame.plot = FALSE,
-                      xlab = 'prediction', ylab = 'standardised residual')
+  standardised <- StandardisedResidualDraw(prediction = diagnostics$estimate, residual = diagnostics$residual_standardised,
+                                           bounds = bounds)
 
 
-  # overdispersion
-  overdispersion_ratio <- sum(`^`(diagnostics$residual_standardised, 2)) / model$df.residual
+  # Overdispersion
+  overdispersion.ratio <- sum(`^`(diagnostics$residual_standardised, 2)) / model$df.residual
 
 
-  # overdispersion test; reject the null hypothesis - overdispersion ≈ 0 - at the 0.05 significance level
-  # the degree of freedom, i.e., df, is number of observations - number of model parameters
-  overdispersion_test <- pchisq(q = sum(`^`(diagnostics$residual_standardised, 2)),
+  # Overdispersion test; reject the null hypothesis - overdispersion ≈ 0 - at the 0.05 significance level.
+  # The degree of freedom, i.e., df, is number of observations - number of model parameters.
+  overdispersion.test <- pchisq(q = sum(`^`(diagnostics$residual_standardised, 2)),
                                 df = model$df.residual, lower.tail = TRUE)
 
 
   return(list(model = model, diagnostics = diagnostics, graph.raw = raw, graph.standardised = standardised,
-              overdispersion_ratio = overdispersion_ratio, overdispersion_test = overdispersion_test))
+              overdispersion.ratio = overdispersion.ratio, overdispersion.test = overdispersion.test))
 
 }
