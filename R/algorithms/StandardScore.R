@@ -39,7 +39,7 @@ StandardScore <- function (gamma = NULL, deviations = 2, data.type, N = NULL) {
   # Evaluate
   # Update: continuous, discrete, proportion
   # score <- qnorm(p = at, lower.tail = TRUE)
-  score <- base::switch(type,
+  score <- base::switch(data.type,
                         continuous = qt(p = at, df = N - 1, lower.tail = TRUE),
                         discrete = qt(p = at, df = N - 1, lower.tail = TRUE),
                         proportion = qnorm(p = at, lower.tail = TRUE))
