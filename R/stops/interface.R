@@ -22,8 +22,14 @@ core <- Execute(data = fundamental, type = 'core')
 quasi <- Execute(data = fundamental, type = 'quasi')
 
 
-
-
-
-
+# We are dealingwith a finite number of events therefore the
+#     expected standard error = expected standard deviation = 1
+# The expected mean is
+#     0
+#
+source('R/algorithms/StandardScore.R')
+MU <- 0
+SE <- 1
+score <- StandardScore(gamma = 95, data.type = 'discrete', N = nrow(core$diagnostics))
+bounds <- MU + score*SE*c(-1, 1)
 
