@@ -4,6 +4,12 @@
 # Created on: 28/05/2023
 
 
+
+#' Raw Residual Graph
+#'
+#' @param prediction: The predicted outcome values
+#' @param residual: Their raw residuals
+#'
 ResidualDraw <- function (prediction, residual) {
 
   T <- data.frame(prediction = prediction, residual = residual)
