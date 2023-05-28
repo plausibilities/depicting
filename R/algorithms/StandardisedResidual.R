@@ -6,6 +6,8 @@
 
 #' The standardised residual
 #'
+#' @description Case Poisson(.), whereby the mean and variance are equivalent
+#'
 #' @param y: The dependent variable.
 #' @param estimates: The dependent variable estimates, courtesy of a model.
 #'
