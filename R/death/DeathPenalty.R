@@ -41,7 +41,7 @@ DeathPenalty <- function() {
   # The z-score (a) within <z standard deviations> via which a confidence level fraction is determined,
   # or (b) with respect to a confidence interval percentage, e.g., 68% ≈ erf(<1 standard deviation>/sqrt(2))
   # ± 1 standard deviations
-  score <- StandardScore(deviations = 1)
+  score <- StandardScore(deviations = 1, data.type = 'proportion')
 
 
   # radius, i.e., margin of error
@@ -64,7 +64,7 @@ DeathPenalty <- function() {
     theme_minimal() +
     theme(panel.grid.minor = element_blank(),
           panel.grid.major = element_line(linewidth = 0.05),
-          plot.margin = margin(t = 1, r = 1, b = 7, l = 1, unit = 'cm'),
+          plot.margin = margin(t = 1, r = 1, b = 1, l = 1, unit = 'cm'),
           plot.title = element_text(hjust = 0.25, size = 13, face = 'bold'),
           plot.caption = element_text(hjust = 0, size = 11, colour = 'darkgrey'),
           axis.title.x = element_text(size = 13, face = 'bold'), axis.text.x = element_text(size = 11),
