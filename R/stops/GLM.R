@@ -14,11 +14,11 @@ GLM <- function(data, type) {
   base::switch(type,
                simple = glm(formula = stops ~ 1, family = poisson(link = 'log'),
                             offset = log(x = arrests), data = data),
-               extended = glm(formula = stops ~ ethnicity, family = poisson(link = 'log'),
+               alternative = glm(formula = stops ~ ethnicity, family = poisson(link = 'log'),
                               offset = log(x = arrests), data = data),
                core = glm(formula = stops ~ ethnicity + precinct, family = poisson(link = 'log'),
                           offset = log(x = arrests), data = data),
-               alternative = glm(formula = stops ~ ethnicity + precinct, family = quasipoisson(link = 'log'),
+               quasi = glm(formula = stops ~ ethnicity + precinct, family = quasipoisson(link = 'log'),
                                  offset = log(x = arrests), data = data)
   )
 
