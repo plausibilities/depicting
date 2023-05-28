@@ -4,11 +4,17 @@
 # Created on: 28/05/2023
 
 
+#' Standardised Residual Graph
+#'
+#' @param prediction: The predicted outcome values
+#' @param residual: Their standardised residuals
+#' @param bounds: The expected confidence interval bounds vis-à-vis mean 0 & standard deviation 1
+#'
 StandardisedResidualDraw <- function (prediction, residual, bounds) {
 
   T <- data.frame(prediction = prediction, residual = residual)
 
-  T %>%
+  diagram <- T %>%
     ggplot(mapping = aes(x = prediction, y = residual)) +
     geom_point(alpha  = 0.65) +
     geom_hline(mapping = aes(yintercept = min(bounds)), colour = 'grey', alpha = 0.80, linewidth = 0.2) +
@@ -24,5 +30,6 @@ StandardisedResidualDraw <- function (prediction, residual, bounds) {
     xlab(label = '\nprediction\n') +
     ylab(label = '\nstandardised residual\n')
 
+  return(diagram)
 
 }
