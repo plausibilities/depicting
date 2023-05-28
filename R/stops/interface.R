@@ -16,7 +16,7 @@ fundamental <- collection$fundamental
 head(fundamental)
 
 
-execute <- Execute(data = fundamental, type = 'core')
+core <- Execute(data = fundamental, type = 'core')
 
 
 
