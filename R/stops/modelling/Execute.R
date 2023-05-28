@@ -4,7 +4,7 @@
 # Created on: 28/05/2023
 
 
-source(file = file.path(getwd(), 'R', 'stops', 'GLM.R'))
+source(file = file.path(getwd(), 'R', 'stops', 'modelling', 'GLM.R'))
 source(file = file.path(getwd(), 'R', 'algorithms', 'StandardisedResidual.R'))
 
 
@@ -32,9 +32,10 @@ Execute <- function(data, type) {
 
   # overdispersion test; reject the null hypothesis - overdispersion ≈ 0 - at the 0.05 significance level
   # the degree of freedom, i.e., df, is number of observations - number of model parameters
-  pchisq(q = sum(`^`(diagnostics$residual_standardised, 2)),
+  test <- pchisq(q = sum(`^`(diagnostics$residual_standardised, 2), lower.tail = TRUE),
          df = model$df.residual,
          lower.tail = TRUE)
 
+  return(list(model = model, diagnostics = diagnostics, graph.raw = raw, graph.standardised = standardised, test = test))
 
 }
