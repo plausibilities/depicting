@@ -12,7 +12,7 @@ source(file = file.path(getwd(), 'R', 'stops', 'algorithms', 'ExtendData.R'))
 #'
 #' @description The data, and features.
 #'
-StudyData <- function () {
+StudyData <- function() {
 
   # The data
   T <- read.table(file = file.path(getwd(), 'data', 'policeStops.dat'), header = TRUE, skip = 6)
@@ -29,7 +29,7 @@ StudyData <- function () {
   # names from -> crime
   # values from -> stops, past.arrests
   T %>%
-    tidyr::pivot_wider(names_from = crime, values_from = c(stops, 'arrests') )
+    tidyr::pivot_wider(names_from = crime, values_from = c(stops, 'arrests'))
 
 
   # keys-> population, precinct, ethinicity
