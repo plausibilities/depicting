@@ -5,6 +5,7 @@
 
 
 source(file = file.path(getwd(), 'R', 'stops', 'algorithms', 'EthnicityEncoder.R'))
+source(file = file.path(getwd(), 'R', 'stops', 'algorithms', 'ExtendData.R'))
 
 
 #' Study Data
@@ -58,20 +59,7 @@ StudyData <- function () {
 
 
   # Extended
-  extended <- fundamental %>%
-    group_by(precinct) %>%
-    summarise(people = sum(population)) %>%
-    right_join(fundamental, by = 'precinct')
-
-  extended <- extended %>%
-    dplyr::mutate(fraction = population/people, .after = 'population')
-
-  extended <- extended %>%
-    mutate(segment = ethnicity) %>%
-    tidyr::pivot_wider(names_from = segment, values_from = segment)
-
-  fields <- c('black', 'hispanic', 'white')
-  extended <- EthnicityEncoder(blob = extended, fields = fields)
+  extended <- ExtendData(fundamental = fundamental)
 
 
   # Hence
