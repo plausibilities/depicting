@@ -24,10 +24,6 @@ StudyData <- function () {
   T$crime <- factor(x = T$crime, levels = c(1, 2, 3, 4), c('violent', 'weapons', 'property', 'drug'))
   T$precinct <- factor(x = T$precinct, levels = 1:75)
 
-  Q <- T %>%
-    tidyr::pivot_wider(names_from = ethnicity, values_from = ethnicity )
-
-
 
   # keys-> population, precinct, ethinicity
   # names from -> crime
@@ -53,16 +49,16 @@ StudyData <- function () {
 
 
   # Aggregated by stops & past arrests
-  fundamental <- T %>%
+  aggregated <- T %>%
     group_by(precinct, ethnicity, population) %>%
     summarise(across(c(stops, arrests), sum))
 
 
   # Extended
-  extended <- ExtendData(fundamental = fundamental)
+  extended <- ExtendData(aggregated = aggregated)
 
 
   # Hence
-  return(list(T = T, fundamental = fundamental, extended = extended))
+  return(list(T = T, aggregated = aggregated, extended = extended))
 
 }
