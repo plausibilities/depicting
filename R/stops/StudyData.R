@@ -4,6 +4,9 @@
 # Created on: 25/05/2023
 
 
+source(file = file.path(getwd(), 'R', 'stops', 'algorithms', 'EthnicityEncoder.R'))
+
+
 #' Study Data
 #'
 #' @description The data, and features.
@@ -19,6 +22,10 @@ StudyData <- function () {
   T$ethnicity <- factor(x = T$ethnicity, levels = c(1, 2, 3), labels = c('black', 'hispanic', 'white'))
   T$crime <- factor(x = T$crime, levels = c(1, 2, 3, 4), c('violent', 'weapons', 'property', 'drug'))
   T$precinct <- factor(x = T$precinct, levels = 1:75)
+
+  Q <- T %>%
+    tidyr::pivot_wider(names_from = ethnicity, values_from = ethnicity )
+
 
 
   # keys-> population, precinct, ethinicity
@@ -50,6 +57,24 @@ StudyData <- function () {
     summarise(across(c(stops, arrests), sum))
 
 
-  return(list(T = T, fundamental = fundamental))
+  # Extended
+  extended <- fundamental %>%
+    group_by(precinct) %>%
+    summarise(people = sum(population)) %>%
+    right_join(fundamental, by = 'precinct')
+
+  extended %>%
+    dplyr::mutate(fraction = population/people, .after = 'population')
+
+  extended <- extended %>%
+    mutate(segment = ethnicity) %>%
+    tidyr::pivot_wider(names_from = segment, values_from = segment)
+
+  fields <- c('black', 'hispanic', 'white')
+  extended <- EthnicityEncoder(blob = extended, fields = fields)
+
+
+  # Hence
+  return(list(T = T, fundamental = fundamental, extended = extended))
 
 }
