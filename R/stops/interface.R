@@ -22,7 +22,7 @@ core <- Execute(data = aggregated, model.name = 'core')
 quasi <- Execute(data = aggregated, model.name = 'quasi')
 
 
-# Experiment
+# Experiments
 model <- glmer(formula = stops ~ 1 + ethnicity + (0 + ethnicity|precinct),
                data = aggregated, family = poisson(), offset = log(x = arrests), nAGQ = 1)
 
