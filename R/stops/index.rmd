@@ -97,5 +97,5 @@ y_{i} \sim \textit{over-dispersed} \; \text{Poisson}(u_{i} \lambda_{i}, \omega) 
 The parameter $\omega$ is over-dispersion parameter.  Akin to a count-data model wherein the variance of the data is
 
 \begin{equation}
-  \omega \lambda_{i} (\#eq:0005)
+\omega \lambda_{i} (\#eq:0005)
 \end{equation}
