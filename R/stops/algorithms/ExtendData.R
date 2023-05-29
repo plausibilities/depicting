@@ -4,12 +4,16 @@
 # Created on: 29/05/2023
 
 
-ExtendData <- function (fundamental) {
+#'
+#'
+#' @param aggregated:
+#'
+ExtendData <- function (aggregated) {
 
-  extended <- fundamental %>%
+  extended <- aggregated %>%
     group_by(precinct) %>%
     summarise(people = sum(population)) %>%
-    right_join(fundamental, by = 'precinct')
+    right_join(aggregated, by = 'precinct')
 
   extended <- extended %>%
     dplyr::mutate(fraction = population/people, .after = 'population')
