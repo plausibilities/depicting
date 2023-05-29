@@ -25,8 +25,8 @@ quasi <- Execute(data = fundamental, model.name = 'quasi')
 # An experiment
 T <- collection$T
 head(T)
-model <- glmer(formula = stops ~ ethnicity + (1|precinct) + (1|crime),
-               data = T, family = poisson(), offset = log(x = arrests), nAGQ = 5)
+model <- glmer(formula = stops ~ ethnicity + (1|precinct),
+               data = fundamental, family = poisson(), offset = log(x = arrests), nAGQ = 5)
 
 extended <- fundamental %>%
   group_by(precinct) %>%
