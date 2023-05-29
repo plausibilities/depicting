@@ -4,19 +4,18 @@
 # Created on: 28/05/2023
 
 
-
 #' Raw Residual Graph
 #'
 #' @param prediction: The predicted outcome values
 #' @param residual: Their raw residuals
 #'
-ResidualDraw <- function (prediction, residual) {
+ResidualDraw <- function(prediction, residual) {
 
   T <- data.frame(prediction = prediction, residual = residual)
 
   diagram <- T %>%
     ggplot(mapping = aes(x = prediction, y = residual)) +
-    geom_point(alpha  = 0.65) +
+    geom_point(alpha = 0.65) +
     theme_minimal() +
     theme(panel.grid.minor = element_blank(),
           panel.grid.major = element_line(linewidth = 0.05),
