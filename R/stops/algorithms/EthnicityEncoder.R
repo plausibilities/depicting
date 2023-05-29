@@ -4,7 +4,11 @@
 # Created on: 29/05/2023
 
 
-
+#' Ethnicity Encoder
+#'
+#' @param blob: The dataframe hosting the ethnicity fields of interesting
+#' @param fields: The ethnicity fields to be encoded
+#'
 EthnicityEncoder <- function (blob, fields) {
 
   # The encoding function; if the field value is NA, zero is
