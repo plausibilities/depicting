@@ -28,12 +28,6 @@ head(T)
 model <- glmer(formula = stops ~ ethnicity + (1|precinct),
                data = fundamental, family = poisson(), offset = log(x = arrests), nAGQ = 5)
 
-extended <- fundamental %>%
-  group_by(precinct) %>%
-  summarise(people = sum(population)) %>%
-  right_join(fundamental, by = 'precinct')
-
-extended$fraction <- extended$population/extended$people
 
 extended %>%
   filter(ethnicity == 'black') %>%
