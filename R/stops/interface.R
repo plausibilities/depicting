@@ -22,7 +22,7 @@ core <- Execute(data = fundamental, model.name = 'core')
 quasi <- Execute(data = fundamental, model.name = 'quasi')
 
 
-# An experiment
+# Experiment
 model <- glmer(formula = stops ~ 1 + ethnicity + (0 + ethnicity|precinct),
                data = fundamental, family = poisson(), offset = log(x = arrests), nAGQ = 1)
 
@@ -31,19 +31,3 @@ Q <- glmer(formula = stops ~ 1 + ethnicity + (1 + ethnicity|precinct),
 
 negative <- glmer.nb(formula = stops ~ 1 + ethnicity + (0 + ethnicity|precinct),
                   data = fundamental, offset = log(x = arrests), nAGQ = 1)
-
-
-
-
-extended %>%
-  filter(ethnicity == 'black') %>%
-  mutate(segment = case_when(
-    fraction < 0.1 ~ "lower",
-    fraction >= 0.1 & fraction <= 0.4 ~ "intermediate",
-    fraction > 0.4 ~ "upper",
-    TRUE ~ NA_character_
-  ))
-
-
-
-
