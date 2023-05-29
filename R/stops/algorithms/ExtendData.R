@@ -8,7 +8,7 @@
 #'
 #' @param aggregated:
 #'
-ExtendData <- function (aggregated) {
+ExtendData <- function(aggregated) {
 
   # A field thatrecords the number of people per precinct
   extended <- aggregated %>%
@@ -20,7 +20,7 @@ ExtendData <- function (aggregated) {
   # The ethnic group fraction per precinct; <population> records the ethnic group population
   # of a precinct, whilst <people> records the number of people per precinct
   extended <- extended %>%
-    dplyr::mutate(fraction = population/people, .after = 'population')
+    dplyr::mutate(fraction = population / people, .after = 'population')
 
 
   # A character-one-hot-encoding of the ethnicity field
