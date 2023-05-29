@@ -63,7 +63,7 @@ StudyData <- function () {
     summarise(people = sum(population)) %>%
     right_join(fundamental, by = 'precinct')
 
-  extended %>%
+  extended <- extended %>%
     dplyr::mutate(fraction = population/people, .after = 'population')
 
   extended <- extended %>%
