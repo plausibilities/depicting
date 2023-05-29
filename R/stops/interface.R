@@ -23,11 +23,11 @@ quasi <- Execute(data = aggregated, model.name = 'quasi')
 
 
 # Experiments
-model <- glmer(formula = stops ~ 1 + ethnicity + (0 + ethnicity|precinct),
+model <- glmer(formula = stops ~ 1 + ethnicity + (0 + ethnicity | precinct),
                data = aggregated, family = poisson(), offset = log(x = arrests), nAGQ = 1)
 
-Q <- glmer(formula = stops ~ 1 + ethnicity + (1 + ethnicity|precinct),
-               data = aggregated, family = poisson(), offset = log(x = arrests), nAGQ = 1)
+Q <- glmer(formula = stops ~ 1 + ethnicity + (1 + ethnicity | precinct),
+           data = aggregated, family = poisson(), offset = log(x = arrests), nAGQ = 1)
 
-negative <- glmer.nb(formula = stops ~ 1 + ethnicity + (0 + ethnicity|precinct),
-                  data = aggregated, offset = log(x = arrests), nAGQ = 1)
+negative <- glmer.nb(formula = stops ~ 1 + ethnicity + (0 + ethnicity | precinct),
+                     data = aggregated, offset = log(x = arrests), nAGQ = 1)
