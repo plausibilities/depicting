@@ -4,14 +4,12 @@
 # Created on: 28/05/2023
 
 
-
 source(file = file.path(getwd(), 'R', 'stops', 'modelling', 'GLM.R'))
 source(file = file.path(getwd(), 'R', 'stops', 'modelling', 'ResidualDraw.R'))
 source(file = file.path(getwd(), 'R', 'stops', 'modelling', 'StandardisedResidualDraw.R'))
 
 source(file = file.path(getwd(), 'R', 'algorithms', 'StandardisedResidual.R'))
 source(file = file.path(getwd(), 'R', 'algorithms', 'StandardScore.R'))
-
 
 
 #' Execute
@@ -41,7 +39,7 @@ Execute <- function(data, model.name) {
 
 
   # Leading to confidence bounds:
-  bounds <- MU + score*SE*c(-1, 1)
+  bounds <- MU + score * SE * c(-1, 1)
 
 
   # Raw Residual
