@@ -40,3 +40,11 @@ vignettes/*.pdf
 
 # IntelliJ IDEA
 .idea
+
+# Logs
+*.log
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+

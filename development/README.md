@@ -61,6 +61,30 @@ Later
 <br>
 <br>
 
+### Snippets
+
+Cf.
+
+```R
+  fundamental %>% 
+    group_by(precinct) %>%
+    mutate(people = sum(population), .keep = 'all')
+```
+
+and
+
+```R
+  fundamental %>%
+    group_by(precinct) %>%
+    summarise(people = sum(population)) %>%
+    right_join(fundamental, by = 'precinct')
+```
+
+The latter is much faster. In each case a new field records the total number of people per precinct
+
+<br>
+<br>
+
 <br>
 <br>
 

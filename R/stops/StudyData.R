@@ -4,11 +4,15 @@
 # Created on: 25/05/2023
 
 
+source(file = file.path(getwd(), 'R', 'stops', 'algorithms', 'EthnicityEncoder.R'))
+source(file = file.path(getwd(), 'R', 'stops', 'algorithms', 'ExtendData.R'))
+
+
 #' Study Data
 #'
 #' @description The data, and features.
 #'
-StudyData <- function () {
+StudyData <- function() {
 
   # The data
   T <- read.table(file = file.path(getwd(), 'data', 'policeStops.dat'), header = TRUE, skip = 6)
@@ -25,7 +29,7 @@ StudyData <- function () {
   # names from -> crime
   # values from -> stops, past.arrests
   T %>%
-    tidyr::pivot_wider(names_from = crime, values_from = c(stops, 'arrests') )
+    tidyr::pivot_wider(names_from = crime, values_from = c(stops, 'arrests'))
 
 
   # keys-> population, precinct, ethinicity
@@ -45,11 +49,16 @@ StudyData <- function () {
 
 
   # Aggregated by stops & past arrests
-  fundamental <- T %>%
+  aggregated <- T %>%
     group_by(precinct, ethnicity, population) %>%
     summarise(across(c(stops, arrests), sum))
 
 
-  return(list(T = T, fundamental = fundamental))
+  # Extended
+  extended <- ExtendData(aggregated = aggregated)
+
+
+  # Hence
+  return(list(T = T, aggregated = aggregated, extended = extended))
 
 }

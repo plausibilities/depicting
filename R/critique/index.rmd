@@ -1,0 +1,219 @@
+---
+title: Analysis Critique
+runningheader: Analysis Critique
+author: Ojo, C
+date: "`r Sys.Date()`"
+documentclass: book
+bibliography: "`r file.path(getwd(), 'bibliography', 'bibliography.bib')`"
+csl: "`r file.path(getwd(), 'bibliography', 'cambridge-university-press-numeric.csl')`"
+link-citations: yes
+classoption:
+  - fleqn
+extra_dependencies:
+  - float
+site: bookdown::bookdown_site
+output: tufte::tufte_book
+---
+
+
+
+<!--- Global Settings --->
+```{r include = FALSE}
+# Settings
+knitr::opts_chunk$set(echo = FALSE, comment = '')
+options(knitr.table.format = 'latex')
+options(knitr.kable.NA = '')
+# Invalidate cache when the tufte version changes
+library(tufte)
+knitr::opts_chunk$set(cache.extra = packageVersion(pkg = 'tufte'))
+options(htmltools.dir.version = FALSE)
+```
+
+
+```{r include = FALSE}
+library(xtable)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(magrittr)
+library(latex2exp)
+library(patchwork)
+library(knitr)
+library(kableExtra)
+library(tmap)
+library(sf)
+```
+
+<!--- settings --->
+```{r exploration settings}
+pathstr <- dirname(getwd())
+```
+
+
+# *ANALYSIS CRITIQUE* {-}
+
+## Introduction
+
+This is a brief evaluation of the data associate's *chatflow* analysis document.  The evaluation assumes that
+
+\begin{minipage}[c]{0.95\textwidth}
+\vspace{10pt}
+\begin{itemize}
+\item Members of the Digital Marketing Team \& Contact Centre Team, herein the teams, are the document's audience.
+\item Within Proximity Designs it is these teams that use \textit{ManyChat}, therefore their members are the organisation's internal \textit{ManyChat} experts.
+\item Thus far, the data associate has not shared any analysis results with either team.
+\item The data associate intends to share the analysis findings via a presentation session; considering the document's format.
+\item Each team's members have varying levels of experience at Proximity Designs, and have minimal knowledge of statistics \& mathematical modelling.
+\end{itemize}
+\end{minipage}
+
+
+\vspace{20pt}
+
+## Analysis Feedback
+
+
+### Background & Audience
+
+The digital marketing & contact centre teams are familiar with *ManyChat*.  Hence, instead of **slides** $3$, $4$, $5$, & $6$, consider two or three background slides that illustrate the associate's understanding of the teams' concerns, alongside the mechanics of a *chatflow*.
+
+\vspace{20pt}
+
+### Problem Statement, Goals, & Objectives
+
+The problem statement of the analysis, and the goals & objectives thereof, are not stated. These items are critical because they are the fundamental guides of an analysis.  A problem statement summarises an overarching issue in focus, and should be informed by the concerns posed by the teams, as illustrated in the background slides. The analysis' goal/s should outline the purpose of the analysis in relation to the problem statement.  For example, if the problem statement focuses on incomplete *chatflow* sessions, an analysis goal might be to
+
+>>> Identify the probable root cause/s of incomplete *chatflow* sessions.
+
+\noindent Usually, an analysis focuses on one or two goals only.  Finally, each goal is investigated via a set of objectives.  For example, an accompanying objective of the goal above might be to
+
+>>> Investigate whether there is a statistically significant overlap between the *LiveChat* enquiries of users that do not complete a *chatflow* session, and the content of the skipped content.
+
+This suggestion assumes that the customers are not shown a flow diagram of steps at the beginning of a *chatflow* session.
+
+\vspace{10pt}
+
+Once the problem statement, goals, and objectives are clear, consider replacing the ``challenges we anticipated'' slide with a slide that outlines these items; and re-write the methodology page in line with the objectives being investigated.  Additionally, consider re-writing the title; especially because *AgronomyBot* seems unrelated.
+
+\vspace{20pt}
+
+### The Analysis
+
+The concerns posed by the teams suggests at least two overarching, but interconnected, lines of investigation.
+
+\vspace{10pt}
+
+Foremost, the digital marketing team is concerned with the volume of incomplete *chatflow* sessions, i.e., sessions wherein the users opt for obtaining more farm practice details via *LiveChat*, rather than finishing a *chatflow* session.
+
+\vspace{10pt}
+
+Second, the contact centre team is concerned about the volume of *LiveChat* enquiries it receives during digital campaigns; this hints at the interconnection. The team's hypothesis is that the number of enquiries increases during digital campaigns.  The interpretation of this hypothesis, which should be discussed/confirmed with the team, is
+
+>>> If the *LiveChat* enquiries of *digital campaign periods* & *campaign free periods* - of the same length - are compared, (number of enquiries)/(number of *chatflow* sessions) **(1)** is higher during a digital campaign period compared to a campaign free period, and **(2)** increases with number of campaigns per period.
+
+These concerns/hypotheses suggests the need to investigate, at least,
+
+\begin{minipage}[c]{0.95\textwidth}
+\vspace{10pt}
+\begin{itemize}
+\item Why users do not complete \textit{chatflow} sessions.
+\item Whether the ratio of \textit{LiveChat enquires} to \textit{chatflow sessions} varies with the absence/presence of digital campaigns.
+\end{itemize}
+\end{minipage}
+
+\vspace{20pt}
+
+However, the first point of the methodology page, **slide 8**, suggests that the predominant focus of the associate's analysis is $\rightarrow$ users that complete a *chatflow* session during campaign periods only.  The slides that focus on the analysis results, **slide 9** onward, reflect this suggestion.  However, in contrast to **slide 8**, their footnotes do not stipulate *chatflow* session completion.^[Slide 17 does not have a footnote.]
+
+\vspace{20pt}
+
+Altogether, consider re-visiting the foci of the analysis in relation to the concerns/hypotheses of the teams; this is akin to addressing the missing problem statements, goals, and objectives.  At present, the analysis does not yet investigate the concerns/hypotheses raised. **In general:**
+
+\vspace{25pt}
+
+\noindent \textcolor{duskyblue}{\textsc{Slides 9 \& 10}}
+
+These slides focus on users that complete a *chatflow* session per digital campaign, they compare the number/proportion of enquires made by users across campaigns. It is stated that some campaigns have a *relatively low number of participants*, but this statement cannot be evaluated in the absence of participants counts.^[For comparison purposes **slide 10** is the more appropriate graph, especially if separated into graphs by *chatflow* steps counts.]  Altogether, the slides do not focus on the teams' concerns/hypotheses.
+
+\vspace{25pt}
+
+\noindent \textcolor{duskyblue}{\textsc{Slides 11, 12, 13, 14, \& 15}}
+
+The purpose of each slide is unclear, hence consider excluding these slides.
+
+Setting purpose aside, the graph of **slide 11** is probably inappropriate vis-à-vis the underlying data, e.g., it disregards the varying number of *chatflow* steps per *chatflow*.  And, including the definition of **link click** in **slide 13** would clarify the population in focus.
+
+\vspace{25pt}
+
+\noindent \textcolor{duskyblue}{\textsc{Slides 16, 17, 18, 19, \& 20}}
+
+These slides focus on a very useful investigation, but there are 2 caveats.
+
+\vspace{10pt}
+
+Foremost, the analysis only focuses on the users that complete a *chatflow* session during a digital campaign.  Second, the categorisation was performed manually.
+
+\vspace{10pt}
+
+Expanding this investigation to include - **(a)** all users that participated in a digital campaign during a specified study period, and **(b)** a second study period, of the same length, but free of digital campaigns - will allow for much richer, and more relevant, root cause investigations.  Especially if *LiveChat* enquiries categorisations are conducted via word clustering algorithms.^[A helpful text is *Leskovec, J., Rajaraman, A., & Ullman, J. (2020). Mining of Massive Datasets (3rd ed.). Cambridge: Cambridge University Press.*]
+
+\vspace{10pt}
+
+**Two investigation examples**, in relation to users who do not complete a *chatflow* session but proceed to a *LiveChat* enquiry, are $\rightarrow$ is there a significant overlap between the content of *chatflow* steps
+
+\begin{minipage}[c]{0.95\textwidth}
+\vspace{10pt}
+\begin{itemize}
+\item skipped, and the \textit{LiveChat} enquiries of these users? [Impatience?  This might be addressed via \textit{chatflow} design adjustments.]
+\item prior to skipping, and the \textit{LiveChat} enquiries made by these users? [This might indicate unclear content.]
+\end{itemize}
+\end{minipage}
+
+\vspace{20pt}
+
+\noindent The data required for this is available, as noted by point 3 of *a note on the data available*.
+
+\vspace{25pt}
+
+\noindent \textcolor{duskyblue}{\textsc{Slide 21}}
+
+To investigate whether there is a relationship between
+
+\begin{minipage}[c]{0.65\textwidth}
+\vspace{10pt}
+\begin{enumerate}
+\item the number of users that made an enquiry after completing a \textit{chatflow} session, \textbf{and}
+\item the total number of users that completed a \textit{chatflow} session
+\end{enumerate}
+\end{minipage}
+
+\vspace{20pt}
+
+during a digital campaign, it is much more appropriate to consider rates instead of raw numbers because each campaign has a different number of participants.^[Per case, point, the rate is calculated by dividing by the total number of digital campaign participants.]  Additionally, the outlined linear regression model is probably inappropriate because
+
+\begin{minipage}[c]{0.95\textwidth}
+\vspace{10pt}
+\begin{itemize}
+\item There are varying number of \textit{chatflow} steps per \textit{chatflow}.
+\item The digital campaigns probably occurred over different lengths of time.
+\item The general knowledge level per farming practice probably varies.
+\end{itemize}
+\end{minipage}
+
+\vspace{20pt}
+
+To directly, or indirectly, account for these variables, and other unknowns, consider multilevel models.^[A very helpful text is *Gelman, A., & Hill, J. (2006). Data Analysis Using Regression and Multilevel/Hierarchical Models (Analytical Methods for Social Research). Cambridge: Cambridge University Press*]
+
+\vspace{20pt}
+
+### Language, Grammar
+
+Consider reviewing the grammar of each page via a text editor that has a grammar inspection tool; I always use such tools when writing.  Please, do contact me for tools recommendations.  Additionally, once ready, I suggest organising at least two grammar review session - one with me, and another with other colleagues.
+
+\vspace{20pt}
+
+## Further Suggestions
+
+Prior to the presentation consider sharing a brief summary that outlines the goal & objectives of the analysis, and anything else that would make it easy to understand the presentation.  A grammar review session will suffice before sharing.
+

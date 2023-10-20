@@ -1,0 +1,7 @@
+tufte::tufte_book:
+  includes:
+    in_header: preamble.tex
+  citation_package: natbib
+  latex_engine: xelatex
+  keep_tex: FALSE
+  toc: FALSE
